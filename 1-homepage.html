@@ -2007,73 +2007,75 @@
     <script type="application/javascript">
       $(function() {
         // Ajax request for quote carousel
-        $.ajax({
-          url: 'https://smileschool-api.hbtn.info/quotes',
-          method: 'GET',
-          dataType: 'json',
-          beforeSend: () => {
-            // Before sending request, start up css loading cirle
-            displayLoading(true);
-          },
-          success: (data) => {
-            // Recieved request and iterate through array to get each unique post
-            $.each(data, (index, dataItem) => {
-              // Dynamically add json data to the quotes section post
-              let carouselInner = $('#carousel-inner');
+        function quoteRequest () {
+          $.ajax({
+            url: 'https://smileschool-api.hbtn.info/quotes',
+            method: 'GET',
+            dataType: 'json',
+            beforeSend: () => {
+              // Before sending request, start up css loading cirle
+              quoteLoading(true);
+            },
+            success: (data) => {
+              // Recieved request and iterate through array to get each unique post
+              $.each(data, (index, dataItem) => {
+                // Dynamically add json data to the quotes section post
+                let carouselInner = $('#carousel-inner');
 
-              // Create carousel item If index is 0, set first carousel item to active
-              let carouselItem;
-              if (index == 0) {
-                carouselItem = $('<div>').addClass('carousel-item active');
-              } else {
-                carouselItem = $('<div>').addClass('carousel-item');
-              }
+                // Create carousel item If index is 0, set first carousel item to active
+                let carouselItem;
+                if (index == 0) {
+                  carouselItem = $('<div>').addClass('carousel-item active');
+                } else {
+                  carouselItem = $('<div>').addClass('carousel-item');
+                }
 
-              // Create carousel row
-              let carouselRow = $('<div>').addClass('row mx-auto align-items-center');
+                // Create carousel row
+                let carouselRow = $('<div>').addClass('row mx-auto align-items-center');
 
-              // Create image divs, gather data for image, and append to row
-              let imgDiv = $('<div>').addClass('col-12 col-sm-2 col-lg-2 offset-lg-1 text-center');
-              let img = $('<img>', {
-                'class': 'd-block align-self-center',
-                'src': dataItem.pic_url,
-                'alt': 'Carousel Pic 1'
+                // Create image divs, gather data for image, and append to row
+                let imgDiv = $('<div>').addClass('col-12 col-sm-2 col-lg-2 offset-lg-1 text-center');
+                let img = $('<img>', {
+                  'class': 'd-block align-self-center',
+                  'src': dataItem.pic_url,
+                  'alt': 'Carousel Pic 1'
+                });
+
+                imgDiv.append(img);
+                carouselRow.append(imgDiv);
+
+                // Create quote div, gather data for quote, and append to row
+                let quoteDiv = $('<div>').addClass('col-12 col-sm-7 offset-sm-2 col-lg-9 offset-lg-0');
+                let textDiv = $('<div>').addClass('quote-text text-white');
+                let paragraph = $('<p>').text(dataItem.text);
+                let nameHeader = $('<h4>').addClass('font-weight-bold').text(dataItem.name);
+                let titleSpan = $('<span>').text(dataItem.title);
+
+                textDiv.append(paragraph).append(nameHeader).append(titleSpan);
+                quoteDiv.append(textDiv);
+                carouselRow.append(quoteDiv);
+
+                // Append carousel row to carousel item, then append item to carousel inner
+                carouselItem.append(carouselRow);
+                carouselInner.append(carouselItem);
+
+                // Call display loading to remove loading circle and show quotes
+                quoteLoading(false);
+  
+                // console.log(dataItem.pic_url);
+                // console.log(carouselInner)
+                // console.log(dataItem.name, index);
               });
-
-              imgDiv.append(img);
-              carouselRow.append(imgDiv);
-
-              // Create quote div, gather data for quote, and append to row
-              let quoteDiv = $('<div>').addClass('col-12 col-sm-7 offset-sm-2 col-lg-9 offset-lg-0');
-              let textDiv = $('<div>').addClass('quote-text text-white');
-              let paragraph = $('<p>').text(dataItem.text);
-              let nameHeader = $('<h4>').addClass('font-weight-bold').text(dataItem.name);
-              let titleSpan = $('<span>').text(dataItem.title);
-
-              textDiv.append(paragraph).append(nameHeader).append(titleSpan);
-              quoteDiv.append(textDiv);
-              carouselRow.append(quoteDiv);
-
-              // Append carousel row to carousel item, then append item to carousel inner
-              carouselItem.append(carouselRow);
-              carouselInner.append(carouselItem);
-
-              // Call display loading to remove loading circle and show quotes
-              displayLoading(false);
- 
-              // console.log(dataItem.pic_url);
-              // console.log(carouselInner)
-              // console.log(dataItem.name, index);
-            });
-          },
-          error: (error) => {
-            // Request did not go through
-            console.error('Error:', error);
-          }
-        });
+            },
+            error: (error) => {
+              // Request did not go through
+              console.error('Error:', error);
+            }
+          });
+        }
 
         // Loading spiral when making ajax request
-        function displayLoading (isLoading) {
+        function quoteLoading (isLoading) {
           const quoteDiv = $('#carousel-inner');
           const prevButton = $('#prev-quote');
           const nextButton = $('#next-quote');
@@ -2092,11 +2094,15 @@
             loadingCircle.addClass('d-none');
           }
         }
+
+        // Call quote ajax request when page is loaded
+        quoteRequest();
+        // videoRequest();
       });
     </script>
 
     <!-- JQuery Import -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    
+
   </body>
 </html>
