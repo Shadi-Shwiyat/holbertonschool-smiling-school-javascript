@@ -242,7 +242,15 @@
   width: 80px;
   height: 80px;
   animation: spin 2s linear infinite;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 300px!important;
+  margin-bottom: 300px!important;
+}
+
+#video-loading-circle {
+  margin-top: 300px!important;
+  margin-bottom: 300px!important;
 }
 
 @keyframes spin {
@@ -297,7 +305,7 @@
   }
 }
 
-/* POPULAR SECTION  */
+/* POPULAR VIDEO SECTION  */
 
 .popular {
   height: auto;
@@ -319,10 +327,6 @@
   padding-bottom: 87px;
 }
 
-.section .card-img-overlay {
-  /* top: 25px; */
-  top: 5%;
-}
 .section .card-title {
   font-size: 16px;
   line-height: 20px;
@@ -347,66 +351,43 @@
   right: var(--popular-arrows-x);
 }
 
-@media screen and (max-width: 1280px) {
-  :root {
-    --popular-arrows-x: -4vw;
-  }
-  .section .card {
-    width: 19vw;
-  }
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 64px;
+  max-height: 64px;
 }
 
-@media screen and (max-width: 1150px) {
-  :root {
-    --popular-arrows-x: -3vw;
-  }
-  .section .card-img-overlay {
-    /* top: 25px; */
-    top: 4%;
-  }
-  .section .card-img-overlay img {
-    width: 35%;
-  }
-}
+/* ----------- Styling to make video carousel advance one card at a time ------------- */
 
-@media screen and (max-width: 991px) {
-  :root {
-    --popular-arrows-x: -3vw;
-  }
-
-  .section .card {
-    width: 16rem;
-  }
-  .section .card-img-overlay img {
-    width: 30%;
-  }
-  .section .card-img-overlay {
-    /* top: 25px; */
-    top: 5%;
-  }
+/* Styling for carousel next button */
+.carousel-control-next-icon-black {
+  background-image: url(images/arrow_black_right.png);
+  height: 63px;
+  width: 30px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100% 100%;
 }
-
-@media screen and (max-width: 767px) {
-  :root {
-    --popular-arrows-x: -6vw;
-  }
-  .section .card {
-    width: 16rem;
-  }
+.carousel-control-prev-icon-black {
+  background-image: url(images/arrow_black_left.png);
+  height: 63px;
+  width: 30px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100% 100%;
 }
-
-@media screen and (max-width: 575px) {
-  :root {
-    --popular-arrows-x: -15px;
-  }
-  .section .card-img-overlay img {
-    width: 30%;
-  }
-  .section .card-img-overlay {
-    /* top: 25px; */
-    top: 5%;
-  }
+.carousel-control-next-icon-black:hover {
+  opacity: .5;
 }
+.carousel-control-prev-icon-black:hover {
+  opacity: .5;
+}
+/* ------------------------------------------------------------------------------- */
 
 /* SMILES Section  */
 
@@ -890,28 +871,4 @@
 .row [class*="col-"] {
   padding-top: 18px;
   padding-bottom: 18px;
-}
-
-@media screen and (min-width: 576px) and (max-width: 767px) {
-  .results .card-img-overlay {
-    top: 1vh;
-  }
-  .results .rating img {
-    width: 12px;
-  }
-
-  .results .rating + span {
-    display: block;
-    padding-top: 30px;
-  }
-}
-
-@media screen and (max-width: 575px) {
-  .results .card-img-overlay {
-    top: 5vh;
-  }
-
-  .results .card {
-    width: 90vw;
-  }
 }
