@@ -338,19 +338,6 @@
   line-height: 24px;
 }
 
-.popular .carousel-control-prev,
-.popular .carousel-control-next {
-  width: 60px;
-}
-
-.popular .carousel-control-prev.arrow-left {
-  left: var(--popular-arrows-x);
-}
-
-.popular .carousel-control-next.arrow-right {
-  right: var(--popular-arrows-x);
-}
-
 .play-button {
   position: absolute;
   top: 50%;
