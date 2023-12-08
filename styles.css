@@ -40,6 +40,10 @@
   opacity: var(--opacity-value);
 }
 
+.fs-7 {
+  font-size: .8rem!important;
+}
+
 /* Header / Hero Styles */
 
 .header {
